@@ -1,5 +1,7 @@
 package com.Capstone.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +33,19 @@ public class MuscleGroupService {
 
 		
 	}
+	
+	public List<MuscleGroup> getByMuscleGroup(String muscle_group_name) {
+		
+		 return muscleGroupRepo.getAllByMuscleGroup(muscle_group_name);
+		
+		
+	}
+	
+	public MuscleGroup getMuscleGroupById(Integer id) {
+		
+		 return muscleGroupRepo.findById(id).get();
+		
+		
+	}
+			
 }

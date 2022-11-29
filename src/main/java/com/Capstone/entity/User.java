@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,10 +31,14 @@ public class User {
 	@Column(name = "password", nullable = false)
 	String password;
 	
-	@OneToOne
-	@JoinColumn(name="workoutId")
-		Workout workout;
-
+	@ManyToMany
+	@JoinTable(
+			name="user_workouts",
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="muscle_group_id")
+	)
+	List<MuscleGroup> workouts;
+	
 	public User() {
 		super();
 	}
@@ -72,6 +78,15 @@ public class User {
 		return id;
 	}
 	
+	
+	public List<MuscleGroup> getWorkouts() {
+		return workouts;
+	}
+
+	public void setWorkouts(List<MuscleGroup> workouts) {
+		this.workouts = workouts;
+	}
+
 	@Override
 	public String toString() {
 		return "User[ id=" + id + ",FullName = " + fullName + ", email" + email + ", password=" + password; 

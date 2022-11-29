@@ -12,6 +12,9 @@ import com.Capstone.entity.Workout;
 
 @Repository
 public interface MuscleGroupRepo extends JpaRepository<MuscleGroup, Integer>{
+	
+	@Query(value = "select * from muscle_group where muscle_group_name = ?1 ", nativeQuery = true)
+	List<MuscleGroup>getAllByMuscleGroup(String muscle_group_name);
 
 	
 }

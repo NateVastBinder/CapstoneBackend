@@ -8,9 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 
@@ -28,6 +32,12 @@ public class MuscleGroup {
 	String muscleGroupName;
 	@Column(name = "reps")
 	String reps = "8-12";
+	
+//	@ManyToMany(
+//			mappedBy="muscle_group"
+//	)
+//	@JsonIgnore
+//	List<User> workouts;
 	
 
 	
@@ -49,6 +59,15 @@ public class MuscleGroup {
 
 	public void setMuscleGroupName(String muscleGroupName) {
 		this.muscleGroupName = muscleGroupName;
+	}
+
+	
+	public String getReps() {
+		return reps;
+	}
+
+	public void setReps(String reps) {
+		this.reps = reps;
 	}
 
 	public Integer getId() {

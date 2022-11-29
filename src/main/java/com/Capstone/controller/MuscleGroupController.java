@@ -56,4 +56,25 @@ public class MuscleGroupController {
 	        }
 	    	
 		}
+	
+	@RequestMapping(
+    		value = "/getAllMuscleGroup/{muscle_group_name}",
+    		method = RequestMethod.GET
+    		
+    		)
+
+@ResponseBody
+    public ResponseEntity<Object> getAllMuscleGroup(@PathVariable String muscle_group_name) {
+	 try {
+            List<MuscleGroup> muscleGoupList = muscleGroupService.getByMuscleGroup(muscle_group_name);
+    
+            // Give proper status codes, OK 200, BadRequest 400, INTERNAL_SERVER_ERROR 500
+            return new ResponseEntity<>(muscleGoupList, HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        } catch(Error e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    	
+	}
 }
